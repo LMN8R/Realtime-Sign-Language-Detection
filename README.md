@@ -158,12 +158,3 @@ Run the app:
 ```bash
 python app.py
 ```
-
-## Notes for presentation
-
-If you're presenting this project, the most important idea to communicate is that it is a two-stage system:
-
-1. `MediaPipe Hands` extracts a structured representation of the hand.
-2. A small sequence model classifies those landmarks into letters.
-
-That choice is what makes the project practical on a small custom dataset.
