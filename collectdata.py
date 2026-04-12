@@ -65,6 +65,8 @@ while True:
     cv2.imshow("ROI",frame[40:400,0:300])
     frame=frame[40:400,0:300]
     interrupt = cv2.waitKey(10)
+    if interrupt & 0xFF == 27:  # Escape key to quit
+        break
     if interrupt & 0xFF == ord('a'):
         cv2.imwrite(directory+'A/'+str(count['a'])+'.png',frame)
     if interrupt & 0xFF == ord('b'):
