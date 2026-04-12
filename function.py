@@ -32,8 +32,8 @@ def extract_keypoints(results):
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             lm = np.array([[res.x, res.y, res.z] for res in hand_landmarks.landmark])
-            lm -= lm[0]                               # translate to wrist origin
-            lm /= (np.linalg.norm(lm[9]) + 1e-6)     # scale by hand size
+            lm -= lm[0]  # translate to wrist origin
+            lm /= (np.linalg.norm(lm[9]) + 1e-6)  # scale by hand size
             return lm.flatten()
     return np.zeros(21 * 3)
 
@@ -41,5 +41,4 @@ def extract_keypoints(results):
 DATA_PATH = os.path.join('MP_Data')
 actions = np.array(['A','B','C','D','E','F','G','H','I','J','K','L','M',
                     'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
-no_sequences = 30
-sequence_length = 15
+sequence_length = 5

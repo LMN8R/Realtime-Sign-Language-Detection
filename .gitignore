@@ -1,2 +1,6 @@
 Image/*
 MP_Data/*
+__pycache__/
+*.pyc
+Logs/train/
+Logs/validation/
