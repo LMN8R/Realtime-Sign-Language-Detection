@@ -6,7 +6,7 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
 from keras.callbacks import TensorBoard, EarlyStopping, ReduceLROnPlateau
 
-
+# Slight data augmentation by adding noise and scaling to sequences
 def augment_sequence(window):
     sequence = np.array(window, dtype=np.float32)
     augmented = []
@@ -27,7 +27,7 @@ def augment_sequence(window):
 
     return np.array(augmented, dtype=np.float32)
 
-
+# Load sequences and labels from .npy files, applying augmentation
 def load_sequences():
     label_map = {label: num for num, label in enumerate(actions)}
     sequences, labels = [], []
@@ -63,7 +63,7 @@ def load_sequences():
 
     return np.array(sequences), np.array(labels), sequence_counts
 
-
+# Create and compile the LSTM model for sequence classification
 def build_model():
     model = Sequential()
     model.add(LSTM(64, return_sequences=True, activation='relu', input_shape=(sequence_length, 63)))
@@ -78,7 +78,7 @@ def build_model():
     model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
     return model
 
-
+# Train the model, evaluate it, and save the results and model files
 def main():
     X, labels_array, sequence_counts = load_sequences()
     y = to_categorical(labels_array).astype(int)

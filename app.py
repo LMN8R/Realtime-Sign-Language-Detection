@@ -17,11 +17,11 @@ LETTER_MARGIN_OVERRIDES = {
     'O': 0.08,
 }
 
-
+# Different ambiguities require different margin thresholds, so we can be more lenient with commonly confused letters and stricter with others
 def required_margin(label):
     return LETTER_MARGIN_OVERRIDES.get(label, MIN_CONFIDENCE_MARGIN)
 
-
+# Custom logic to resolve 'I' vs 'J' based on pinky movement, since they have identical hand shapes but 'J' involves a motion
 def resolve_dynamic_letters(sequence, res, actions):
     top_candidates = np.argsort(res)[::-1][:3]
     candidate_labels = {actions[idx] for idx in top_candidates}
@@ -38,7 +38,7 @@ def resolve_dynamic_letters(sequence, res, actions):
 
     return int(np.where(actions == 'I')[0][0])
 
-
+# Confidence panel shows top 5 predictions with bars and percentages, highlighting those above the threshold
 def draw_confidence_panel(frame, res, actions, threshold):
     top5_idx = np.argsort(res)[::-1][:5]
     panel_x = 315
